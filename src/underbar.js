@@ -115,6 +115,30 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    //iterator = iterator || _.identity;
+
+    //create result array
+    var result = [];
+    var intArray = []
+      //loop through each element
+      for (var i =0 ; i< array.length ; i++) {
+        //push in element into result array if not alreay in result array
+        //use indexOf to check if element already exist in result array
+        if (iterator === undefined) {
+          if (_.indexOf(result, array[i]) === -1) {
+            result.push(array[i])
+          }
+        }
+        else {
+          if (_.indexOf(intArray, iterator(array[i])) === -1) {
+          intArray.push(iterator(array[i]))//[true,false]
+          result.push(array[i])//[2,1]
+          }
+        }
+      }
+    //return result array
+    return result;
+
   };
 
 
